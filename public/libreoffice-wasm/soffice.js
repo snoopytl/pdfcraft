@@ -1,8 +1,14 @@
 var Module = typeof Module !== 'undefined' ? Module : {};
 Module.locateFile = function(path, prefix) {
+  // 拦截数据包
   if (path.endsWith('soffice.data.gz') || path.endsWith('soffice.data')) {
     return 'https://img2.koftl.ac.cn/soffice.data.gz';
   }
+  // 拦截引擎包 (新增的这部分)
+  if (path.endsWith('soffice.wasm.gz') || path.endsWith('soffice.wasm')) {
+    return 'https://img2.koftl.ac.cn/soffice.wasm.gz';
+  }
+  // 其他小文件正常走本地
   return prefix + path;
 };
 
